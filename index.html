@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fares Software Developer</title>
+    <meta name="description" content="Fares Software Developer based in Hamburg">
+    <link rel="canonical" href="https://kamel-fares.tech">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0a0a0a;
+            --border: rgba(201, 168, 76, 0.12);
+            --gold: #C9A84C;
+            --gold-light: #E3C367;
+            --text: #e6e2d9;
+            --text-dim: #8a8478;
+            --text-muted: #5a5650;
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        html { scroll-behavior: smooth; scroll-padding-top: 32px; }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection { background: rgba(201, 168, 76, 0.2); color: var(--gold-light); }
+
+        /* ===== HERO ===== */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 120px 24px 48px;
+            max-width: 380px;
+            margin: 0 auto;
+        }
+
+        .hero-name {
+            font-family: var(--font-display);
+            font-size: clamp(2.6rem, 8vw, 4.5rem);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .hero-role { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 8px; }
+        .hero-domain { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); }
+
+        .hero-links {
+            display: flex; gap: 14px; margin-top: 18px;
+            flex-wrap: wrap; justify-content: center;
+        }
+
+        .hero-links a {
+            color: var(--text-dim); text-decoration: none; font-size: 0.8rem;
+        }
+
+        .hero-links a:hover { color: var(--gold); }
+
+        /* ===== TRIANGLE NAV ===== */
+        .triangle-nav {
+            display: flex;
+            justify-content: center;
+            padding: 40px 24px 56px;
+        }
+
+        .triangle-nav svg {
+            width: 100%;
+            max-width: 340px;
+            height: auto;
+        }
+
+        .tri-band {
+            fill: transparent;
+            stroke: var(--border);
+            stroke-width: 1.2;
+            cursor: pointer;
+            transition: fill 0.15s;
+        }
+
+        .tri-band:hover {
+            fill: rgba(201, 168, 76, 0.05);
+        }
+
+        .tri-label {
+            fill: var(--text-dim);
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            pointer-events: none;
+            text-anchor: middle;
+        }
+
+        .tri-number {
+            fill: var(--gold);
+            font-family: 'Outfit', sans-serif;
+            font-size: 9px;
+            font-weight: 700;
+            pointer-events: none;
+            text-anchor: middle;
+        }
+
+        .tri-outline {
+            fill: none;
+            stroke: var(--gold);
+            stroke-width: 1;
+            opacity: 0.25;
+        }
+
+        /* ===== CONTENT TIERS ===== */
+        .tier {
+            margin: 0 auto;
+            padding: 0 24px 52px;
+        }
+
+        .tier-1 { max-width: 480px; }
+        .tier-2 { max-width: 560px; }
+        .tier-3 { max-width: 640px; }
+        .tier-4 { max-width: 720px; }
+        .tier-5 { max-width: 800px; }
+
+        .tier-heading {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 24px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .tier-heading .step-num {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== ENTRIES ===== */
+        .entry {
+            margin-bottom: 20px;
+            padding-left: 14px;
+            border-left: 2px solid var(--border);
+        }
+
+        .entry:last-child { margin-bottom: 0; }
+
+        .entry-header {
+            display: flex; justify-content: space-between;
+            align-items: baseline; flex-wrap: wrap; gap: 4px 12px;
+        }
+
+        .entry-title { font-weight: 600; font-size: 0.88rem; color: var(--text); }
+        .entry-date { font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono); white-space: nowrap; }
+        .entry-org { font-size: 0.78rem; color: var(--text-dim); margin-top: 1px; }
+        .entry-desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 3px; }
+
+        /* ===== PROJECTS ===== */
+        .project {
+            margin-bottom: 16px;
+            padding-left: 14px;
+            border-left: 2px solid var(--border);
+        }
+
+        .project:last-child { margin-bottom: 0; }
+        .project-name { font-weight: 600; font-size: 0.88rem; color: var(--text); }
+        .project-tech { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); }
+        .project-desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+
+        /* ===== SKILLS ===== */
+        .skill-row { display: flex; gap: 12px; margin-bottom: 10px; align-items: baseline; }
+        .skill-row:last-child { margin-bottom: 0; }
+        .skill-label { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-dim); min-width: 90px; flex-shrink: 0; }
+        .skill-list { font-size: 0.82rem; color: var(--text-muted); font-family: var(--font-mono); }
+
+        /* ===== EDUCATION ===== */
+        .edu-block {
+            margin-bottom: 16px;
+            padding-left: 14px;
+            border-left: 2px solid var(--border);
+        }
+
+        .edu-block:last-child { margin-bottom: 0; }
+        .edu-title { font-weight: 600; font-size: 0.88rem; color: var(--text); }
+        .edu-school { font-size: 0.78rem; color: var(--text-dim); }
+        .edu-courses { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
+        .edu-courses span { font-family: var(--font-mono); font-size: 0.72rem; }
+
+        /* ===== FOLD INSTRUCTIONS ===== */
+        .fold-steps {
+            list-style: none;
+            counter-reset: fold;
+        }
+
+        .fold-steps li {
+            counter-increment: fold;
+            margin-bottom: 16px;
+            padding-left: 14px;
+            border-left: 2px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            position: relative;
+        }
+
+        .fold-steps li:last-child { margin-bottom: 0; }
+
+        .fold-steps li::before {
+            content: counter(fold);
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.72rem;
+            color: var(--gold);
+            position: absolute;
+            left: -24px;
+            top: 1px;
+            width: 18px;
+            text-align: right;
+        }
+
+        .fold-steps strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .fold-note {
+            margin-top: 20px;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            display: flex; flex-direction: column;
+            align-items: center; padding: 40px 24px 60px;
+            text-align: center;
+        }
+
+        .cta-button {
+            padding: 12px 32px;
+            font-family: var(--font-display);
+            font-size: 0.88rem; font-weight: 600;
+            color: #0a0a0a; background: var(--gold);
+            border: none; border-radius: 4px; cursor: pointer;
+        }
+
+        .cta-button:hover { background: var(--gold-light); }
+        .cta-hint { margin-top: 10px; font-size: 0.72rem; color: var(--text-muted); }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center; padding: 28px 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted); font-size: 0.72rem;
+        }
+
+        .footer a { color: var(--gold); text-decoration: none; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 500px) {
+            .hero { padding: 100px 16px 36px; }
+            .tier { padding: 0 16px 44px; }
+            .skill-row { flex-direction: column; gap: 2px; }
+            .skill-label { min-width: unset; }
+            .entry-header { flex-direction: column; }
+            .triangle-nav svg { max-width: 280px; }
+            .tri-label { font-size: 9px; }
+        }
+
+        /* ===== MAGNETIC CURSOR ===== */
+        .mag-cursor {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #d43030;
+            box-shadow: 0 0 4px rgba(212, 48, 48, 0.5);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .mag-cursor.active { opacity: 1; }
+
+        /* Subtle glow on nearby elements */
+        [data-magnet] {
+            will-change: transform;
+            transition: box-shadow 0.3s;
+        }
+
+        [data-magnet].mag-near {
+            box-shadow: 0 0 8px rgba(212, 48, 48, 0.08);
+        }
+
+        @media (max-width: 768px) {
+            .mag-cursor { display: none !important; }
+        }
+
+        @media print {
+            .mag-cursor { display: none !important; }
+        }
+
+        /* ===== ORIGAMI (HIDDEN) ===== */
+        #origami-print-template { display: none; }
+
+        /* ===== @MEDIA PRINT ===== */
+        @media print {
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            @page { size: A4 portrait; margin: 12mm; }
+            body { background: #fff !important; color: #1a1a1a !important; font-family: 'Inter', 'Segoe UI', sans-serif; }
+            #web-experience { display: none !important; }
+
+            #origami-print-template {
+                display: flex !important; flex-direction: column;
+                align-items: center; width: 100%; padding-top: 4mm;
+            }
+
+            .print-header { text-align: center; margin-bottom: 8mm; font-family: 'Outfit', sans-serif; }
+            .print-header h1 { font-size: 14pt; font-weight: 700; color: #1a1a1a; margin-bottom: 2mm; }
+            .print-header p { font-size: 8pt; color: #555; max-width: 140mm; margin: 0 auto; line-height: 1.5; }
+
+            .origami-container { position: relative; width: 180mm; height: 156mm; }
+
+            .face { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
+            .face-center { clip-path: polygon(25% 50%, 75% 50%, 50% 100%); background: #fdf8ec; }
+            .face-top    { clip-path: polygon(50% 0%, 25% 50%, 75% 50%);   background: #fef3dc; }
+            .face-left   { clip-path: polygon(25% 50%, 0% 100%, 50% 100%); background: #f5f0e0; }
+            .face-right  { clip-path: polygon(75% 50%, 100% 100%, 50% 100%); background: #faf5e5; }
+
+            .face-content { position: absolute; text-align: center; color: #1a1a1a; font-family: 'Inter', sans-serif; line-height: 1.4; }
+            .face-center .face-content { top: 67%; left: 50%; transform: translate(-50%, -50%); width: 52mm; }
+            .face-top    .face-content { top: 33%; left: 50%; transform: translate(-50%, -50%) rotate(180deg); width: 50mm; }
+            .face-left   .face-content { top: 83%; left: 25%; transform: translate(-50%, -50%) rotate(60deg); width: 46mm; }
+            .face-right  .face-content { top: 83%; left: 75%; transform: translate(-50%, -50%) rotate(-60deg); width: 46mm; }
+
+            .face-title { font-family: 'Outfit', sans-serif; font-size: 7pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 2mm; padding-bottom: 1.2mm; border-bottom: 0.3mm solid #c9a84c; }
+            .face-center .face-title { font-size: 10pt; border-bottom: none; padding-bottom: 0; margin-bottom: 1mm; letter-spacing: 0.06em; }
+            .face-subtitle { font-size: 6pt; color: #555; margin-bottom: 1.5mm; }
+            .face-domain { font-family: 'JetBrains Mono', monospace; font-size: 5.5pt; color: #9a7d30; margin-bottom: 1.5mm; }
+            .face-contact { font-size: 5pt; color: #666; line-height: 1.5; }
+            .face-item { font-size: 5pt; margin-bottom: 1.2mm; text-align: left; }
+            .face-item:last-child { margin-bottom: 0; }
+            .face-item strong { display: block; font-size: 5.5pt; color: #1a1a1a; }
+            .face-item span { color: #666; font-size: 4.5pt; }
+            .face-skills { font-size: 5pt; color: #333; text-align: left; }
+            .face-skills dt { font-weight: 600; font-size: 5pt; color: #1a1a1a; margin-top: 1.2mm; }
+            .face-skills dt:first-child { margin-top: 0; }
+            .face-skills dd { font-size: 4.5pt; color: #555; margin-left: 0; }
+
+            .origami-guides { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; }
+            .print-footer { margin-top: 6mm; text-align: center; font-size: 6.5pt; color: #888; }
+            .print-footer .legend { display: flex; justify-content: center; gap: 6mm; margin-top: 2mm; }
+            .print-footer .legend-item { display: flex; align-items: center; gap: 2mm; }
+            .legend-line-solid { width: 10mm; height: 0; border-top: 0.5mm solid #333; }
+            .legend-line-dashed { width: 10mm; height: 0; border-top: 0.5mm dashed #888; }
+        }
+    </style>
+</head>
+<body style="cursor: none;">
+
+<div id="web-experience">
+
+    <!-- HERO -->
+    <section class="hero" id="top">
+        <h1 class="hero-name">Kamel<br>Fares</h1>
+        <p class="hero-role">Software Developer · Hamburg</p>
+        <p class="hero-domain">I love tech, Like really really love it !!!</p>
+        <div class="hero-links">
+            <a href="mailto:Kamelfares122@gmail.com">Email</a>
+            <a href="https://linkedin.com/in/kamel-fares" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/kamelfares" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.youtube.com/@mathematikss" target="_blank" rel="noopener">YouTube</a>
+        </div>
+    </section>
+
+    <!-- TRIANGLE NAV -->
+    <nav class="triangle-nav" aria-label="Main navigation">
+        <!--
+            Triangle: apex (180,0), base-left (0,240), base-right (360,240)
+            6 horizontal bands, each 40px tall.
+            At y: left = 180 - 0.75y, right = 180 + 0.75y
+        -->
+        <svg viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg">
+            <!-- Outer triangle outline -->
+            <polygon class="tri-outline" points="180,0 0,240 360,240"/>
+
+            <!-- Band 1: y 0-40 — About -->
+            <a href="#top">
+                <polygon class="tri-band" points="180,0 150,40 210,40"/>
+                <text class="tri-label" x="180" y="30">About</text>
+            </a>
+
+            <!-- Band 2: y 40-80 — Experience -->
+            <a href="#experience">
+                <polygon class="tri-band" points="150,40 210,40 240,80 120,80"/>
+                <text class="tri-label" x="180" y="66">Experience</text>
+            </a>
+
+            <!-- Band 3: y 80-120 — Projects -->
+            <a href="#projects">
+                <polygon class="tri-band" points="120,80 240,80 270,120 90,120"/>
+                <text class="tri-label" x="180" y="106">Projects</text>
+            </a>
+
+            <!-- Band 4: y 120-160 — Skills -->
+            <a href="#skills">
+                <polygon class="tri-band" points="90,120 270,120 300,160 60,160"/>
+                <text class="tri-label" x="180" y="146">Skills</text>
+            </a>
+
+            <!-- Band 5: y 160-200 — Education -->
+            <a href="#education">
+                <polygon class="tri-band" points="60,160 300,160 330,200 30,200"/>
+                <text class="tri-label" x="180" y="186">Education</text>
+            </a>
+
+            <!-- Band 6: y 200-240 — How to Fold -->
+            <a href="#fold">
+                <polygon class="tri-band" points="30,200 330,200 360,240 0,240"/>
+                <text class="tri-label" x="180" y="226">How to Fold</text>
+            </a>
+        </svg>
+    </nav>
+
+    <!-- 1 · EXPERIENCE -->
+    <section class="tier tier-1" id="experience">
+        <h2 class="tier-heading"><span class="step-num">01</span> Experience</h2>
+
+        <div class="entry">
+            <div class="entry-header">
+                <span class="entry-title">Software Developer</span>
+                <span class="entry-date">2025 – Present</span>
+            </div>
+            <div class="entry-org">Edel Optics</div>
+            <div class="entry-desc">Migrating legacy frontend to Vue.js Composition API. Building UI components with Nuxt and Pinia.Ensuring accessibility and security best practices.</div>
+        </div>
+
+        <div class="entry">
+            <div class="entry-header">
+                <span class="entry-title">Hardware and Smart eyewear designer</span>
+                <span class="entry-date">(not selling)</span>
+            </div>
+            <div class="entry-org">Dinge.cool</div>
+            <div class="entry-desc">I design and manufacture cool stuff from I2C integrated sunglasses and Retro style buddies with cameras and cute reto animation and smart accessories with NFC and electronic components(some without due to the presence of N52 magnets), and using highly engineered materials such as: Carbon Fiber,PA12 Nylon, ASA.</div>
+        </div>
+
+        <div class="entry">
+            <div class="entry-header">
+                <span class="entry-title">Machine Learning Engineer</span>
+                <span class="entry-date">2023</span>
+            </div>
+            <div class="entry-org">Omdena</div>
+            <div class="entry-desc">Contributed to a Mental Support LLM. EDA, data analysis, model optimization with XGBoost.</div>
+        </div>
+
+        <div class="entry">
+            <div class="entry-header">
+                <span class="entry-title">Data Science Intern</span>
+                <span class="entry-date">2023</span>
+            </div>
+            <div class="entry-org">The Sparks Foundation</div>
+            <div class="entry-desc">Delivered 8 projects across Supervised/Unsupervised ML: K-Means, Time Series, Regression.</div>
+        </div>
+
+        <div class="entry">
+            <div class="entry-header">
+                <span class="entry-title">Content Creator</span>
+                <span class="entry-date">2025 – Present</span>
+            </div>
+            <div class="entry-org">MathematikZ · YouTube</div>
+            <div class="entry-desc">Visualizing math concepts (Linear Algebra, Algorithms, Computational Math) using Manim, R, and LaTeX. In English and German.</div>
+        </div>
+    </section>
+
+    <!-- 2 · PROJECTS -->
+    <section class="tier tier-2" id="projects">
+        <h2 class="tier-heading"><span class="step-num">02</span> Projects</h2>
+
+        <a href="https://beblind.app" target="_blank" class="project" style="text-decoration: none; color: inherit; display: block;">
+            <span class="project-name">BeBlind.app (Live)</span>
+            <div class="project-desc">Web application simulating various eye diseases and visual impairments.</div>
+        </a>
+
+        <div class="project">
+            <span class="project-name">ML Suite</span>
+            <span class="project-tech"> · PyTorch</span>
+            <div class="project-desc">Breast Cancer Classification and Fraud Detection models.</div>
+        </div>
+
+        <div class="project">
+            <span class="project-name">Web Scraper</span>
+            <span class="project-tech"> · Scrapy · Selenium</span>
+            <div class="project-desc">Automated extraction tool with rotating IPs.</div>
+        </div>
+
+        <div class="project">
+            <span class="project-name">Port Scanner</span>
+            <span class="project-tech"> · Rust</span>
+            <div class="project-desc">Multithreaded high-performance network analysis tool.</div>
+        </div>
+    </section>
+
+    <!-- 3 · SKILLS -->
+    <section class="tier tier-3" id="skills">
+        <h2 class="tier-heading"><span class="step-num">03</span> Skills</h2>
+
+        <div class="skill-row">
+            <span class="skill-label">Languages</span>
+            <span class="skill-list">JavaScript · PHP · C · C++(14) · Java · SQL</span>
+        </div>
+        <div class="skill-row">
+            <span class="skill-label">Frameworks</span>
+            <span class="skill-list">Vue.js · Nuxt · Pinia · PyTorch · Docker · PostgreSQL · AzureML · Fabric</span>
+        </div>
+        <div class="skill-row">
+            <span class="skill-label">Certs</span>
+            <span class="skill-list">Azure AI-900 · Azure DP-100 · GitHub Certified · Google Data Eng. (in progress)</span>
+        </div>
+        <div class="skill-row">
+            <span class="skill-label">Spoken</span>
+            <span class="skill-list">Arabic (C2) · English (C2) · German (C1)</span>
+        </div>
+    </section>
+
+    <!-- 4 · EDUCATION -->
+    <section class="tier tier-4" id="education">
+        <h2 class="tier-heading"><span class="step-num">04</span> Education</h2>
+
+        <div class="edu-block">
+            <div class="edu-title">B.Sc. Computer Engineering</div>
+            <div class="edu-school">HAW Hamburg · Expected 2027</div>
+            <div class="edu-courses">
+                Coursework: <span>Electronics I · Electronics II · Signals & Systems · Operating Systems · FPGA Design · Digital Logic · Cybersecurity · Embedded Systems · Low-Level Programming</span>
+            </div>
+        </div>
+
+        <div class="edu-block">
+            <div class="edu-title">Abitur</div>
+            <div class="edu-school">Sahara International Schools · Grade 1.1 (Top 0.008%)</div>
+        </div>
+    </section>
+
+    <!-- 5 · HOW TO FOLD -->
+    <section class="tier tier-5" id="fold">
+        <h2 class="tier-heading"><span class="step-num">05</span> How to Fold Your Resume</h2>
+
+        <ol class="fold-steps">
+            <li><strong>Print.</strong> Press Ctrl+P (or click the button below). Print at 100% scale on A4 paper. Make sure "Background graphics" is enabled in your print settings.</li>
+            <li><strong>Cut.</strong> Cut along all the solid outer lines with scissors or a craft knife. You will end up with a shape that looks like a large triangle divided into four smaller triangles.</li>
+            <li><strong>Score.</strong> Using a ruler and a blunt edge (like an empty pen), score firmly along the three dashed inner fold lines. This creates crisp, clean creases.</li>
+            <li><strong>Fold the top.</strong> Fold the top triangle (Experience) downward along the horizontal dashed line so it sits on top of the center triangle (Contact).</li>
+            <li><strong>Fold the sides.</strong> Fold the left triangle (Skills) and right triangle (Projects) upward along their diagonal fold lines, bringing all three flaps together.</li>
+            <li><strong>Seal.</strong> Use a small piece of tape along the meeting edges to lock the shape. You now have a 3D tetrahedron with your resume on every face.</li>
+        </ol>
+
+        <div class="fold-note">
+            Each face of the tetrahedron contains a different section of the CV: contact info on the base, experience, skills, and projects on the three visible sides.
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <button class="cta-button" data-magnet="s" data-mag-strength="1.5" onclick="window.print()">Print My Resume (Ctrl+P)</button>
+        <p class="cta-hint">The printout folds into a 3D origami tetrahedron.</p>
+    </section>
+
+    <footer class="footer">
+        <p>yeah that's all <a href="https://kamel-fares.tech">kamel-fares.tech</a></p>
+    
+            <div class="footer-links" style="margin-top: 10px;">
+                <a href="https://www.youtube.com/@mathematikss" target="_blank">YouTube</a> • 
+                <a href="https://www.linkedin.com/in/kamel-fares/" target="_blank">LinkedIn</a> • 
+                <a href="https://beblind.app" target="_blank">BeBlind.app</a> • 
+                <a href="https://glassez.de" target="_blank">Glassez.de</a>
+            </div>
+    </footer>
+
+</div>
+
+<!-- ===== ORIGAMI PRINT TEMPLATE ===== -->
+<div id="origami-print-template">
+
+    <div class="print-header">
+        <h1>Origami Resume | Kamel Fares</h1>
+        <p>Print at 100% scale on A4. Cut along solid lines. Fold along dashed lines. Tape the edges to form a 3D tetrahedron.</p>
+    </div>
+
+    <div class="origami-container">
+
+        <div class="face face-center">
+            <div class="face-content">
+                <div class="face-title">Kamel Fares</div>
+                <div class="face-subtitle">Software Developer · Hamburg</div>
+                <div class="face-domain">kamel-fares.tech</div>
+                <div class="face-contact">
+                    Kamelfares122@gmail.com<br>
+                    linkedin.com/in/kamel-fares<br>
+                    github.com/kamel-fares<br>
+                    B.Sc. CompEng · HAW Hamburg 
+                </div>
+            </div>
+        </div>
+
+        <div class="face face-top">
+            <div class="face-content">
+                <div class="face-title">Experience</div>
+                <div class="face-item"><strong>Software Developer · Edel Optics</strong>2025–Present<br><span>Vue.js, Nuxt, Pinia, PHP, a11y</span></div>
+                <div class="face-item"><strong>Founder/Hobbist · glassez.cool & dinge.cool </strong>2026–Present<br><span>Smart eyewear, NFC, Peek</span></div>
+                <div class="face-item"><strong>ML Engineer · Omdena</strong>2023<br><span>Mental Support LLM, XGBoost</span></div>
+                <div class="face-item"><strong>Mathematikss · YouTube</strong>2025–Present<br><span>Math visuals: Manim, R, LaTeX</span></div>
+            </div>
+        </div>
+
+        <div class="face face-left">
+            <div class="face-content">
+                <div class="face-title">Skills</div>
+                <dl class="face-skills">
+                    <dt>Code</dt><dd>JS · PHP · C · C++ · Java · SQL</dd>
+                    <dt>Frameworks</dt><dd>Vue.js · Nuxt · Pinia · PyTorch</dd>
+                    <dt>Infra</dt><dd>Docker · PostgreSQL · Azure</dd>
+                    <dt>Certs</dt><dd>AI-900 · DP-100 · GitHub</dd>
+                    <dt>Languages</dt><dd>Arabic C2 · English C2 · German C1</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="face face-right">
+            <div class="face-content">
+                <div class="face-title">Projects</div>
+                <div class="face-item"><strong><a href="https://beblind.app" target="_blank">BeBlind.app</a></strong><span>Eye disease simulation web app</span></div>
+                <div class="face-item"><strong>Port Scanner (Rust)</strong><span>Multithreaded network analysis</span></div>
+            </div>
+        </div>
+
+        <svg class="origami-guides" viewBox="0 0 180 156" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="90,0 45,78 0,156 180,156 135,78" fill="none" stroke="#2a2a2a" stroke-width="0.6" stroke-linejoin="round"/>
+            <line x1="45" y1="78" x2="135" y2="78" stroke="#888" stroke-width="0.35" stroke-dasharray="3,1.5"/>
+            <line x1="45" y1="78" x2="90" y2="156" stroke="#888" stroke-width="0.35" stroke-dasharray="3,1.5"/>
+            <line x1="135" y1="78" x2="90" y2="156" stroke="#888" stroke-width="0.35" stroke-dasharray="3,1.5"/>
+            <text font-size="3.2" fill="#999" font-family="Inter,sans-serif" x="67.5" y="38" transform="rotate(-60,67.5,38)" text-anchor="middle">CUT</text>
+            <text font-size="3.2" fill="#999" font-family="Inter,sans-serif" x="112.5" y="38" transform="rotate(60,112.5,38)" text-anchor="middle">CUT</text>
+            <text font-size="3.2" fill="#999" font-family="Inter,sans-serif" x="20" y="115" transform="rotate(-60,20,115)" text-anchor="middle">CUT</text>
+            <text font-size="3.2" fill="#999" font-family="Inter,sans-serif" x="160" y="115" transform="rotate(60,160,115)" text-anchor="middle">CUT</text>
+            <text font-size="3.2" fill="#999" font-family="Inter,sans-serif" x="90" y="154" text-anchor="middle">CUT</text>
+            <text font-size="3" fill="#aaa" font-family="Inter,sans-serif" x="90" y="75" text-anchor="middle">FOLD</text>
+            <text font-size="3" fill="#aaa" font-family="Inter,sans-serif" x="65" y="119" transform="rotate(60,65,119)" text-anchor="middle">FOLD</text>
+            <text font-size="3" fill="#aaa" font-family="Inter,sans-serif" x="115" y="119" transform="rotate(-60,115,119)" text-anchor="middle">FOLD</text>
+        </svg>
+    </div>
+
+    <div class="print-footer">
+        <p>kamel-fares.tech · Print at 100% scale on A4</p>
+        <div class="legend">
+            <div class="legend-item"><div class="legend-line-solid"></div> Cut</div>
+            <div class="legend-item"><div class="legend-line-dashed"></div> Fold</div>
+        </div>
+    </div>
+
+</div>
+
+<!-- MAGNETIC CURSOR -->
+<div class="mag-cursor" id="mag-cursor"></div>
+
+<script>
+(function() {
+    /*
+     * Gentle magnetic cursor:
+     *  - Cursor STICKS toward the nearest button (cursor moves, not button)
+     *  - Button shifts only 4-6px toward cursor (subtle nudge)
+     *  - Right-click: button gently pushes away instead
+     *  - No sparks, no rings, just smooth motion
+     */
+
+    var cursor = document.getElementById('mag-cursor');
+    var rawX = -100, rawY = -100;  // actual mouse position
+    var curX = -100, curY = -100;  // rendered cursor position (smoothed)
+    var elements = [];
+    var RADIUS = 120;
+    var repelling = false;
+    var isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+    if (isMobile) { document.body.style.cursor = ''; return; }
+
+    function init() {
+        // Tag magnetic elements
+        document.querySelectorAll('.tri-band').forEach(function(el) {
+            el.setAttribute('data-magnet', ''); el.setAttribute('data-mag-str', '0.7');
+        });
+        document.querySelectorAll('.hero-links a').forEach(function(el) {
+            el.setAttribute('data-magnet', ''); el.setAttribute('data-mag-str', '1');
+        });
+        document.querySelectorAll('.cta-button').forEach(function(el) {
+            el.setAttribute('data-magnet', ''); el.setAttribute('data-mag-str', '1.2');
+        });
+        document.querySelectorAll('.footer a, .footer-links a').forEach(function(el) {
+            el.setAttribute('data-magnet', ''); el.setAttribute('data-mag-str', '0.8');
+        });
+
+        elements = [];
+        document.querySelectorAll('[data-magnet]').forEach(function(el) {
+            elements.push({
+                el: el,
+                str: parseFloat(el.getAttribute('data-mag-str') || '1'),
+                sx: 0, sy: 0  // current button shift
+            });
+        });
+    }
+
+    // Track raw mouse
+    document.addEventListener('mousemove', function(e) {
+        rawX = e.clientX; rawY = e.clientY;
+        if (!cursor.classList.contains('active')) cursor.classList.add('active');
+    });
+    document.addEventListener('mouseleave', function() {
+        cursor.classList.remove('active');
+        rawX = -1000; rawY = -1000;
+    });
+
+    // Right-click = push mode
+    document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+    document.addEventListener('mousedown', function(e) {
+        if (e.button === 2) repelling = true;
+    });
+    document.addEventListener('mouseup', function(e) {
+        if (e.button === 2) repelling = false;
+    });
+
+    // ===== MAGNETIC FLUX CLICK EFFECT =====
+    // A creative, abstract particle simulation of magnetic flux bursts
+    function spawnFlux(x, y) {
+        var size = 500; // larger for bigger random bursts
+        var half = size / 2;
+        var c = document.createElement('canvas');
+        c.width = size; c.height = size;
+        c.style.cssText = 'position:fixed;pointer-events:none;z-index:9998;mix-blend-mode:screen;' +
+            'left:' + (x - half) + 'px;top:' + (y - half) + 'px;';
+        document.body.appendChild(c);
+        var ctx = c.getContext('2d');
+
+        // RANDOMIZE ENTIRE ANIMATION CHARACTERISTICS
+        var numParticles = Math.floor(40 + Math.random() * 60); // 40 to 100
+        var globalSpeedMult = 0.6 + Math.random() * 1.2; // 0.6x to 1.8x speed
+        var globalSizeMult = 0.5 + Math.random() * 1.3; // 0.5x to 1.8x size
+        var dur = 1000 + Math.random() * 800; // 1s to 1.8s
+        
+        // Randomize color palette for this specific burst
+        var palettes = [
+            ['#e05050', '#C9A84C', '#ffffff'], // red/gold
+            ['#5080e0', '#00f0ff', '#ffffff'], // blue/cyan
+            ['#C9A84C', '#fff9e6', '#ffffff'], // pure gold
+            ['#9d50e0', '#e0509d', '#ffffff'], // purple/pink
+            ['#50e0a0', '#a0ff50', '#ffffff'], // green/lime
+            ['#e05050', '#5080e0', '#C9A84C']  // multi
+        ];
+        var palette = palettes[Math.floor(Math.random() * palettes.length)];
+
+        var particles = [];
+        for (var i = 0; i < numParticles; i++) {
+            var angle = Math.random() * Math.PI * 2;
+            var maxR = (30 + Math.random() * 140) * globalSizeMult; 
+            var speed = (0.02 + Math.random() * 0.05) * globalSpeedMult;
+            var dir = Math.random() > 0.5 ? 1 : -1;
+            particles.push({
+                baseAngle: angle,
+                maxR: maxR,
+                t: 0, 
+                speed: speed * dir,
+                color: palette[Math.floor(Math.random() * palette.length)],
+                history: []
+            });
+        }
+
+        var t0 = performance.now();
+
+        function draw(now) {
+            var elapsed = now - t0;
+            var alpha = 1 - (elapsed / dur);
+            if (alpha <= 0) {
+                c.remove();
+                return;
+            }
+
+            ctx.clearRect(0, 0, size, size);
+
+            for (var i = 0; i < particles.length; i++) {
+                var p = particles[i];
+                if (p.t >= Math.PI || p.t <= -Math.PI) continue;
+                
+                p.t += p.speed;
+                if (p.t > Math.PI) p.t = Math.PI;
+                if (p.t < -Math.PI) p.t = -Math.PI;
+                
+                // r = maxR * sin^2(t) creates a perfect dipole field loop
+                var r = p.maxR * Math.pow(Math.sin(p.t), 2);
+                
+                var localX = r * Math.cos(p.t);
+                var localY = r * Math.sin(p.t);
+                
+                // Rotate to baseAngle to shoot out in all directions
+                var px = half + localX * Math.cos(p.baseAngle) - localY * Math.sin(p.baseAngle);
+                var py = half + localX * Math.sin(p.baseAngle) + localY * Math.cos(p.baseAngle);
+                
+                p.history.push({x: px, y: py});
+                if (p.history.length > 12) p.history.shift();
+                
+                if (p.history.length > 1) {
+                    ctx.beginPath();
+                    ctx.moveTo(p.history[0].x, p.history[0].y);
+                    for (var j = 1; j < p.history.length; j++) {
+                        ctx.lineTo(p.history[j].x, p.history[j].y);
+                    }
+                    ctx.strokeStyle = p.color;
+                    ctx.globalAlpha = alpha * Math.pow(Math.abs(Math.sin(p.t)), 0.5); 
+                    ctx.lineWidth = 2.5;
+                    ctx.lineCap = 'round';
+                    ctx.stroke();
+                }
+                
+                // Spark head
+                ctx.beginPath();
+                ctx.arc(px, py, 1.5, 0, Math.PI * 2);
+                ctx.fillStyle = '#fff';
+                ctx.globalAlpha = alpha;
+                ctx.fill();
+            }
+
+            requestAnimationFrame(draw);
+        }
+        requestAnimationFrame(draw);
+    }
+
+    // Left-click spawns flux
+    document.addEventListener('click', function(e) {
+        spawnFlux(e.clientX, e.clientY);
+    });
+
+    function tick() {
+        // Find closest magnetic element and compute cursor pull
+        var pullX = 0, pullY = 0;
+        var closestDist = Infinity;
+
+        for (var i = 0; i < elements.length; i++) {
+            var m = elements[i];
+            var rect = m.el.getBoundingClientRect();
+            var cx = rect.left + rect.width / 2;
+            var cy = rect.top + rect.height / 2;
+
+            var dx = rawX - cx;
+            var dy = rawY - cy;
+            var dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < RADIUS && dist > 0.5) {
+                var falloff = 1 - (dist / RADIUS); // 0..1
+                var strength = falloff * falloff;    // quadratic
+                var nx = dx / dist;
+                var ny = dy / dist;
+
+                // Button nudge: shift 4-6px toward cursor (or away if repelling)
+                var maxShift = 5 * m.str;
+                if (repelling) {
+                    // Push away: shift in opposite direction
+                    var targetSx = -nx * strength * maxShift * 1.5;
+                    var targetSy = -ny * strength * maxShift * 1.5;
+                } else {
+                    var targetSx = nx * strength * maxShift;
+                    var targetSy = ny * strength * maxShift;
+                }
+
+                // Smooth toward target
+                m.sx += (targetSx - m.sx) * 0.15;
+                m.sy += (targetSy - m.sy) * 0.15;
+
+                m.el.classList.add('mag-near');
+
+                // Cursor pull: stick toward the nearest edge/point on the element
+                if (dist < closestDist) {
+                    closestDist = dist;
+                    
+                    // Nearest point on the bounding box
+                    var edgeX = Math.max(rect.left, Math.min(rawX, rect.right));
+                    var edgeY = Math.max(rect.top, Math.min(rawY, rect.bottom));
+
+                    // Pull cursor heavily toward this point so it 'sticks'
+                    var pullStrength = strength * 0.9 * m.str; // strong pull
+                    pullX = (edgeX - rawX) * pullStrength;
+                    pullY = (edgeY - rawY) * pullStrength;
+                }
+            } else {
+                // Spring back to origin
+                m.sx *= 0.85;
+                m.sy *= 0.85;
+                m.el.classList.remove('mag-near');
+            }
+
+            // Apply button shift
+            if (m.el instanceof SVGElement) {
+                m.el.setAttribute('transform',
+                    'translate(' + m.sx.toFixed(2) + ',' + m.sy.toFixed(2) + ')');
+            } else {
+                m.el.style.transform =
+                    'translate(' + m.sx.toFixed(2) + 'px,' + m.sy.toFixed(2) + 'px)';
+            }
+        }
+
+        // Smoothly interpolate cursor position (stick effect)
+        var targetCX = rawX + pullX;
+        var targetCY = rawY + pullY;
+        curX += (targetCX - curX) * 0.2;
+        curY += (targetCY - curY) * 0.2;
+
+        cursor.style.left = curX.toFixed(1) + 'px';
+        cursor.style.top = curY.toFixed(1) + 'px';
+
+        requestAnimationFrame(tick);
+    }
+
+    init();
+    requestAnimationFrame(tick);
+
+    window.addEventListener('resize', function() {
+        isMobile = window.matchMedia('(max-width: 768px)').matches;
+        if (isMobile) {
+            document.body.style.cursor = '';
+            cursor.classList.remove('active');
+        } else {
+            document.body.style.cursor = 'none';
+        }
+    });
+})();
+</script>
+
+</body>
+</html>
