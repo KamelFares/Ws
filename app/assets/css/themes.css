@@ -1,0 +1,118 @@
+/* ===== GOOGLE FONTS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+/* ===== BASE THEME (Ra - Default) ===== */
+:root {
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --bg: #0d0c07;
+  --bg-card: #18160c;
+  --bg-elevated: #242111;
+  --border: rgba(255, 215, 0, 0.25);
+  --border-strong: rgba(255, 215, 0, 0.6);
+  --accent: #FFD700;
+  --accent-light: #FFEE55;
+  --accent-glow: transparent;
+  --accent-dim: #C7a700;
+  --text: #FFFDF0;
+  --text-dim: #DCD4A0;
+  --text-muted: #948C56;
+  --card-gradient-1: #FFD700;
+  --card-gradient-2: #FFF176;
+}
+
+/* ===== GOD THEMES ===== */
+
+.theme-ra, .theme-obelisk, .theme-slifer {
+  --bg: #0d0c07;
+  --bg-card: #18160c;
+  --bg-elevated: #242111;
+  --border: rgba(255, 215, 0, 0.25);
+  --border-strong: rgba(255, 215, 0, 0.6);
+  --accent: #FFD700;
+  --accent-light: #FFEE55;
+  --accent-glow: transparent;
+  --accent-dim: #C7a700;
+  --text: #FFFDF0;
+  --text-dim: #DCD4A0;
+  --text-muted: #948C56;
+  --card-gradient-1: #FFD700;
+  --card-gradient-2: #FFF176;
+}
+
+/* ===== GLOBAL STYLES ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background-color 0.6s ease, color 0.6s ease;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ===== HIERATIC DIRECTIVE ===== */
+.hieratic-char {
+  display: inline-block;
+  transition: opacity 0.15s;
+}
+
+.hieratic-char.decrypting {
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+.hieratic-char.resolved {
+  color: inherit;
+  opacity: 1;
+}
+
+/* ===== CURSOR ===== */
+.mag-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  transform: translate(-50%, -50%);
+}
+
+.mag-cursor.active { opacity: 1; }
+
+[data-magnet] {
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .mag-cursor { display: none !important; }
+}
+
+@media print {
+  .mag-cursor { display: none !important; }
+}
+
+/* ===== SCROLL TRANSITIONS ===== */
+.fade-up-enter-active {
+  transition: all 0.6s ease-out;
+}
+.fade-up-enter-from {
+  opacity: 0;
+  transform: translateY(30px);
+}
