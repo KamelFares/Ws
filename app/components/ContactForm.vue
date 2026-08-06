@@ -12,7 +12,7 @@ const submitted = ref(false)
 function handleSubmit() {
   if (!isValid.value) return
   submitted.value = true
-  // In production, this would POST to an API
+  // In production, this would POST to an API test
   setTimeout(() => {
     fields.value = { name: '', email: '', message: '' }
     submitted.value = false
