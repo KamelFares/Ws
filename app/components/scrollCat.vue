@@ -14,7 +14,7 @@ let hissTimeout: ReturnType<typeof setTimeout> | null = null
 const triggerHiss = () => {
   isHissing.value = true
   
-  // Clear any existing timeout if clicked multiple times quickly
+  // Clear any existing timeous if clicked multiple times quickly
   if (hissTimeout) clearTimeout(hissTimeout)
   
   // Revert back to the normal frame after 1.5 seconds
@@ -38,7 +38,7 @@ const scrollPercent = computed(() => {
 const transformStyle = computed(() => {
   if (typeof window === 'undefined') return {}
   
-  const edgePadding = 12
+  const edgePadding = 20
   
   const maxX = windowWidth.value - catSize - edgePadding
   const maxY = windowHeight.value - catSize - edgePadding
