@@ -1,7 +1,5 @@
-/* ===== GOOGLE FONTS ===== */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
-
 /* ===== BASE THEME (Ra - Default) ===== */
+/* NOTE: Google Fonts are loaded via nuxt.config.ts <link> tags — no @import needed here */
 :root {
   --font-display: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -96,7 +94,7 @@ body {
 
 .mag-cursor.active { opacity: 1; }
 
-[data-magnet] {
+[data-magnet]:hover {
   will-change: transform;
 }
 

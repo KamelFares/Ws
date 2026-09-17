@@ -12,7 +12,7 @@ const submitted = ref(false)
 function handleSubmit() {
   if (!isValid.value) return
   submitted.value = true
-  // In production, this would POST to an API test
+  // In production, this would POST to an API test endpoint. For now, we just reset the form after a delay.
   setTimeout(() => {
     fields.value = { name: '', email: '', message: '' }
     submitted.value = false
