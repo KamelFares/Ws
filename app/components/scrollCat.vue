@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import { useWindowScroll, useWindowSize } from '@vueuse/core'
 
-const { y } = useWindowScroll()
+const { y, scrollPercent } = useScrollProgress()
 const { width: windowWidth, height: windowHeight } = useWindowSize()
 
 const catSize = 100
@@ -32,15 +31,8 @@ const triggerHiss = () => {
   }, 1500)
 }
 
-const scrollPercent = computed(() => {
-  if (typeof document === 'undefined') return 0
-  const docHeight = document.documentElement.scrollHeight - windowHeight.value
-  if (docHeight <= 0) return 0
-  
-  // Cut document height in half so animation ends halfway down the page
-  const targetScrollHeight = docHeight / 2
-  return Math.min(1, Math.max(0, y.value / targetScrollHeight))
-})
+
+
 
 const isSleeping = computed(() => scrollPercent.value >= 1 && !isHissing.value)
 

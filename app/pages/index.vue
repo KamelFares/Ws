@@ -186,8 +186,8 @@ useHead({
       </div>
     </section>
 
-    <!-- ===== ORIGAMI PRINT TEMPLATE (Hidden on web, visible on print) ===== -->
-    <OrigamiPrintTemplate />
+    <!-- ===== ORIGAMI PRINT TEMPLATE (Hidden on web, lazy-loaded — only needed on print) ===== -->
+    <LazyOrigamiPrintTemplate />
 
     <!-- ===== FOOTER ===== -->
     <footer class="text-center py-12 px-6" style="border-top: 1px solid var(--border);">

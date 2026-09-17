@@ -1,8 +1,10 @@
 <script setup lang="ts">
-const { y } = useWindowScroll()
+const { y: _y, scrollPercent } = useScrollProgress()
 const { height: windowHeight } = useWindowSize()
 
-const scrollPercent = computed(() => {
+// Re-derive full-page scroll for the LP bar (uses full doc height, not halved)
+const { y } = useWindowScroll()
+const lpScrollPercent = computed(() => {
   if (!import.meta.client) return 0
   const docHeight = document.documentElement.scrollHeight - windowHeight.value
   if (docHeight <= 0) return 0
@@ -10,7 +12,7 @@ const scrollPercent = computed(() => {
 })
 
 const lifePoints = computed(() => {
-  return Math.round(8000 * (1 - scrollPercent.value))
+  return Math.round(8000 * (1 - lpScrollPercent.value))
 })
 
 const lpColor = computed(() => {
@@ -28,12 +30,18 @@ watch(lifePoints, (target) => {
     const diff = target - displayLP.value
     if (Math.abs(diff) < 1) {
       displayLP.value = target
+      animFrame = null
       return
     }
     displayLP.value += diff * 0.15
     animFrame = requestAnimationFrame(animate)
   }
   animate()
+})
+
+// Fix #7 — cancel any in-flight rAF on component teardown
+onUnmounted(() => {
+  if (animFrame) cancelAnimationFrame(animFrame)
 })
 </script>
 

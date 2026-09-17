@@ -114,3 +114,41 @@ body {
   opacity: 0;
   transform: translateY(30px);
 }
+
+/* ===== CUSTOM SCROLLBAR ===== */
+/* Accent color token — change once, applies everywhere */
+:root {
+  --scrollbar-thumb: var(--accent);        /* #FFD700 by default  */
+  --scrollbar-thumb-hover: var(--accent-light); /* #FFEE55 on hover */
+  --scrollbar-track: transparent;
+  --scrollbar-width: 6px;
+}
+
+/* ── Firefox (standard modern API) ── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* ── Chromium / Safari (WebKit) ── */
+::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  height: var(--scrollbar-width); /* horizontal scrollbars too */
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 9999px; /* fully rounded pill */
+  border: 2px solid transparent; /* breathing room without a coloured track */
+  background-clip: content-box;  /* keeps rounded edges crisp */
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+  background-clip: content-box;
+}

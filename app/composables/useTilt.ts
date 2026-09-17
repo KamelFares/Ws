@@ -1,27 +1,35 @@
-import { ref, type Ref } from 'vue'
+import { ref, computed, type Ref } from 'vue'
 
 export function useTilt(elRef: Ref<HTMLElement | null>, maxAngle = 15) {
   const tiltX = ref(0)
   const tiltY = ref(0)
   const glareX = ref(50)
   const glareY = ref(50)
+  let rafId: number | null = null
+  let pendingPx = 0.5
+  let pendingPy = 0.5
 
   function onMouseMove(e: MouseEvent) {
     if (!elRef.value) return
     const rect = elRef.value.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-    const px = x / rect.width
-    const py = y / rect.height
-    tiltY.value = (px - 0.5) * maxAngle * 2
-    tiltX.value = -(py - 0.5) * maxAngle * 2
-    glareX.value = px * 100
-    glareY.value = py * 100
+    pendingPx = (e.clientX - rect.left) / rect.width
+    pendingPy = (e.clientY - rect.top) / rect.height
+
+    // Throttle reactive updates to one per animation frame (fixes jank on 120Hz)
+    if (rafId) return
+    rafId = requestAnimationFrame(() => {
+      tiltY.value  = (pendingPx - 0.5) * maxAngle * 2
+      tiltX.value  = -(pendingPy - 0.5) * maxAngle * 2
+      glareX.value = pendingPx * 100
+      glareY.value = pendingPy * 100
+      rafId = null
+    })
   }
 
   function onMouseLeave() {
-    tiltX.value = 0
-    tiltY.value = 0
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null }
+    tiltX.value  = 0
+    tiltY.value  = 0
     glareX.value = 50
     glareY.value = 50
   }

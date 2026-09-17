@@ -116,7 +116,7 @@ export const skills: Skill[] = [
   { label: 'Languages', items: 'JavaScript, PHP, C, C++(14), Java, SQL' },
   { label: 'Frameworks', items: 'Vue.js, Nuxt, Pinia, PyTorch, Docker, PostgreSQL, AzureML, Fabric' },
   { label: 'Certs', items: 'Azure AI-900, Azure DP-100, GitHub Certified, Google Data Eng. (in progress)' },
-  { label: 'Languages', items: 'Arabic (C2), English (C2), German (C1)' }
+  { label: 'Spoken',     items: 'Arabic (C2), English (C2), German (C1)' }
 ]
 
 export const education: Education[] = [

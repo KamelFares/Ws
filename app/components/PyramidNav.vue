@@ -9,6 +9,9 @@ const bands = [
 ]
 
 const textYPositions = [22, 60, 100, 140, 180, 220]
+
+// Reactive hover — avoids inline DOM mutations that bypass Vue reactivity (#10)
+const hoveredBand = ref<string | null>(null)
 </script>
 
 <template>
@@ -30,12 +33,12 @@ const textYPositions = [22, 60, 100, 140, 180, 220]
       >
         <polygon
           :points="band.points"
-          fill="transparent"
+          :fill="hoveredBand === band.label ? 'rgba(255, 215, 0, 0.15)' : 'transparent'"
           stroke="var(--border)"
           stroke-width="0.5"
           class="transition-all duration-300 cursor-pointer"
-          @mouseenter="($event.target as SVGElement).style.fill = 'rgba(255, 215, 0, 0.15)'"
-          @mouseleave="($event.target as SVGElement).style.fill = 'transparent'"
+          @mouseenter="hoveredBand = band.label"
+          @mouseleave="hoveredBand = null"
         />
         <text
           x="180"

@@ -1,5 +1,8 @@
 import { computed, type Ref } from 'vue'
 
+// Compiled once at module load — not re-created on every keystroke
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
 export function useFormEnergy(fields: Ref<Record<string, string>>) {
   const completionPercent = computed(() => {
     const entries = Object.values(fields.value)
@@ -12,7 +15,7 @@ export function useFormEnergy(fields: Ref<Record<string, string>>) {
     const f = fields.value
     return (
       f.name?.trim().length > 1 &&
-      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email || '') &&
+      EMAIL_REGEX.test(f.email || '') &&
       f.message?.trim().length > 5
     )
   })

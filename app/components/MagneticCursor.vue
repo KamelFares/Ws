@@ -6,30 +6,40 @@ let curX = -100
 let curY = -100
 const isActive = ref(false)
 const isMobile = ref(false)
+let animFrameId: number | null = null
 
 function tick() {
-  if (isMobile.value || !cursorRef.value) {
-    requestAnimationFrame(tick)
-    return
-  }
+  if (!cursorRef.value) return  // loop dies naturally — no re-queue on missing ref
 
-  // Smooth 1:1 cursor position following without any magnetic pull
   curX += (rawX - curX) * 0.4
   curY += (rawY - curY) * 0.4
 
   cursorRef.value.style.left = `${curX.toFixed(1)}px`
-  cursorRef.value.style.top = `${curY.toFixed(1)}px`
+  cursorRef.value.style.top  = `${curY.toFixed(1)}px`
 
-  requestAnimationFrame(tick)
+  animFrameId = requestAnimationFrame(tick)
+}
+
+function startLoop() {
+  if (animFrameId) return
+  animFrameId = requestAnimationFrame(tick)
+}
+
+function stopLoop() {
+  if (animFrameId) {
+    cancelAnimationFrame(animFrameId)
+    animFrameId = null
+  }
 }
 
 onMounted(() => {
-  isMobile.value = window.matchMedia('(max-width: 768px)').matches
-  if (isMobile.value) return
+  const mq = window.matchMedia('(max-width: 768px)')
+  isMobile.value = mq.matches
 
-  document.body.style.cursor = 'none'
-
-  requestAnimationFrame(tick)
+  if (!isMobile.value) {
+    document.body.style.cursor = 'none'
+    startLoop()
+  }
 
   document.addEventListener('mousemove', (e) => {
     rawX = e.clientX
@@ -37,19 +47,22 @@ onMounted(() => {
     isActive.value = true
   })
 
-  window.addEventListener('resize', () => {
-    isMobile.value = window.matchMedia('(max-width: 768px)').matches
-    if (isMobile.value) {
+  mq.addEventListener('change', (e) => {
+    isMobile.value = e.matches
+    if (e.matches) {
       document.body.style.cursor = ''
       isActive.value = false
+      stopLoop()
     } else {
       document.body.style.cursor = 'none'
+      startLoop()
     }
   })
+})
 
-  onUnmounted(() => {
-    document.body.style.cursor = ''
-  })
+onUnmounted(() => {
+  stopLoop()
+  document.body.style.cursor = ''
 })
 </script>
 
